@@ -19,10 +19,10 @@ Firebaseでは監視対象のノード以下すべて再取得されるので、
 処理速度を考慮するなら、追加・削除・変更など、個別のイベントに着目した方が良いかもしれない。
 今回は練習なのでシンプルにやってみる。
  -->
-		<div class="input-group input-group-sm col-sm-8" *ngFor="let msg of serverMessages">
+		<div class="input-group input-group-sm" *ngFor="let msg of serverMessages">
 		  <span class="input-group-addon">{{ msg.name }}</span>
 		  <span class="form-control">{{ msg.text }}</span>
-		  <span class="input-group-btn　text-right">
+		  <span class="input-group-btn">
 		    <button class="btn btn-default" type="button" (click)="deleteMessage( msg.$key )">delete</button>
 		  </span>
 	  </div>
