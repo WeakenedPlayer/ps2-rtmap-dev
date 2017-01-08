@@ -1,11 +1,30 @@
-<h2>LocalText</h2>
-<input type="text" [(ngModel)]="localText.name">
-<input type="text" [(ngModel)]="localText.message">
-<button (click)="onSubmit()">submit</button>
-<hr>
-<h2>ServerText</h2>
-<ul>
-<li>name: {{ serverText.name }}</li>
-<li>message: {{ serverText.message }}</li>
-</ul>
-
+<div class="row">
+	<div class="col-sm-12">
+		<h2>Message</h2>
+	  <div class="form-group">
+	    <button (click)="deleteAllMessages()">delete all</button>
+	  </div>
+    <div class="form-group">
+			<input type="text" [(ngModel)]="localText.name">
+			<input type="text" [(ngModel)]="localText.text">
+	    <button (click)="addMessage()">add</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+  <h2>Log</h2>
+<!-- 
+Firebaseでは監視対象のノード以下すべて再取得されるので、ngForするとすべて描画し直しかもしれない。
+処理速度を考慮するなら、追加・削除・変更など、個別のイベントに着目した方が良いかもしれない。
+今回は練習なのでシンプルにやってみる。
+ -->
+		<div class="input-group input-group-sm col-sm-8" *ngFor="let msg of serverMessages">
+		  <span class="input-group-addon">{{ msg.name }}</span>
+		  <span class="form-control">{{ msg.text }}</span>
+		  <span class="input-group-btn　text-right">
+		    <button class="btn btn-default" type="button" (click)="deleteMessage( msg.$key )">delete</button>
+		  </span>
+	  </div>
+	</div>
+</div>

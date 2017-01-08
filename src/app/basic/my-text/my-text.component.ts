@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 
-// ƒT[ƒo‚É•Û‘¶‚·‚éƒf[ƒ^‚ÌŒ`
-class MyTextObject {
+class MyMessageObject {
   name: string;
-  message: string;
+  text: string;
 }
 
 @Component({
@@ -15,33 +14,37 @@ class MyTextObject {
 
 export class MyTextComponent implements OnInit {
   af: AngularFire;
-  serverTextObservable: FirebaseObjectObservable<MyTextObject>;
-  serverText: MyTextObject;
-  localText: MyTextObject;
+  serverMessageObserver: FirebaseListObservable<any>;
+  serverMessages: Array<MyMessageObject>;
+
+  localText: MyMessageObject;
 
   constructor( af: AngularFire ) {
-      // AngularFire‚ÌInjection
-      this.af = af;
+    this.af = af;
+    this.localText = { name: 'anonymous', text: '' };
 
-      // ‰Šú‰»
-      this.localText = { name: 'anonymous', message: '...' };
-      this.serverText = { name: '', message: '' };
+    this.serverMessageObserver = this.af.database.list('/messages');
 
-      // AngularFire‚ÅFirebase‚Ìƒf[ƒ^‚ğŠÄ‹(Observe)
-      this.serverTextObservable = this.af.database.object('/test');
-
-      // ŠÄ‹‘ÎÛ‚Ìƒf[ƒ^‚ª•Ï‰»‚µ‚½‚Ìˆ’u‚ğİ’è(snapshot=‚»‚ÌuŠÔ‚Ìƒf[ƒ^‚ğˆø”‚É–á‚¤)
-      this.serverTextObservable.subscribe( snapshot => {
-        this.serverText = snapshot;
-        }
-      );
-    }
-
-  ngOnInit() {
+    // å¤‰æ›´ã‚’ç›£è¦–(ä¸€éƒ¨ã«å¤‰æ›´ãŒã‚ã£ã¦ã‚‚å…¨éƒ¨å–å¾—ã—ãªãŠã•ã‚Œã‚‹)
+    this.serverMessageObserver.subscribe( snapshots => {
+      this.serverMessages = snapshots;
+    });
   }
 
-  onSubmit() {
-    // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚Ì’l(localText)‚ğg‚Á‚ÄAƒT[ƒoã‚Ìƒf[ƒ^‚ğXV‚·‚éB
-    this.serverTextObservable.set( this.localText );
+  addMessage() {
+    // LocalMessageã‚’ã‚µãƒ¼ãƒã«è¿½åŠ ã™ã‚‹
+    this.serverMessageObserver.push( this.localText );
+    this.localText.text = '';
+  }
+
+  deleteMessage( key: string ) {
+    this.serverMessageObserver.remove( key );
+  }
+
+  deleteAllMessages() {
+    this.serverMessageObserver.remove();
+  }
+
+  ngOnInit() {
   }
 }
