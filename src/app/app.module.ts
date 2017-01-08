@@ -4,15 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { MyTextComponent } from './basic/my-text/my-text.component';
+import { firebaseConfig } from './basic/firebase_config';
+
+// Firebase
+import { AngularFireModule } from 'angularfire2';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MyTextComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp( firebaseConfig )
   ],
   providers: [],
   bootstrap: [AppComponent]
