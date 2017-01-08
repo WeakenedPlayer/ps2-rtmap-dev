@@ -1,5 +1,11 @@
+<h2>LocalText</h2>
+<input type="text" [(ngModel)]="localText.name">
+<input type="text" [(ngModel)]="localText.message">
+<button (click)="onSubmit()">submit</button>
+<hr>
+<h2>ServerText</h2>
 <ul>
-<li>{{ localText.name }}</li>
-<li>{{ localText.message }}</li>
+<li>name: {{ serverText.name }}</li>
+<li>message: {{ serverText.message }}</li>
 </ul>
 

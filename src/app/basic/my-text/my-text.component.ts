@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
+// サーバに保存するデータの形
 class MyTextObject {
-  $key?: string;
   name: string;
   message: string;
 }
@@ -16,17 +16,32 @@ class MyTextObject {
 export class MyTextComponent implements OnInit {
   af: AngularFire;
   serverTextObservable: FirebaseObjectObservable<MyTextObject>;
+  serverText: MyTextObject;
   localText: MyTextObject;
 
   constructor( af: AngularFire ) {
-    this.af = af;
-    this.localText = { name: '', message: '' };
-    this.serverTextObservable = this.af.database.object('/test');
+      // AngularFireのInjection
+      this.af = af;
 
-    this.serverTextObservable.subscribe( snapshot => {
-      this.localText = snapshot;
-    });
-  }
+      // 初期化
+      this.localText = { name: 'anonymous', message: '...' };
+      this.serverText = { name: '', message: '' };
+
+      // AngularFireでFirebaseのデータを監視(Observe)
+      this.serverTextObservable = this.af.database.object('/test');
+
+      // 監視対象のデータが変化した時の処置を設定(snapshot=その瞬間のデータを引数に貰う)
+      this.serverTextObservable.subscribe( snapshot => {
+        this.serverText = snapshot;
+        }
+      );
+    }
+
   ngOnInit() {
+  }
+
+  onSubmit() {
+    // テキストボックスの値(localText)を使って、サーバ上のデータを更新する。
+    this.serverTextObservable.set( this.localText );
   }
 }
