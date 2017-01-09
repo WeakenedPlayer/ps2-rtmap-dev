@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-
+import * as Leaflet from 'leaflet';
 class MyMessageObject {
   name: string;
   text: string;
@@ -16,6 +16,7 @@ export class MyTextComponent implements OnInit {
   af: AngularFire;
   serverMessageObserver: FirebaseListObservable<any>;
   serverMessages: Array<MyMessageObject>;
+  map: Leaflet.Map;
 
   localText: MyMessageObject;
 

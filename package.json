@@ -26,7 +26,8 @@
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2",
     "firebase": "latest",
-    "angularfire2": "latest"
+    "angularfire2": "latest",
+    "leaflet": "latest"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
