@@ -8,9 +8,9 @@ import * as Leaflet from 'leaflet';
 })
 export class LeafletMapComponent implements OnInit {
   @Input() option: Leaflet.MapOptions = {
-    attributionControl: false, crs: Leaflet.CRS.Simple
+    attributionControl: true,
+    crs: Leaflet.CRS.Simple
   };
-
   private mapDiv: any;
   private map: Leaflet.Map;
   private tile: Leaflet.TileLayer;
@@ -18,7 +18,6 @@ export class LeafletMapComponent implements OnInit {
   constructor( el: ElementRef, re: Renderer ) {
     // create div element inside "app-leaflet-test" for leaflet map
     this.mapDiv = re.createElement( el.nativeElement, 'div');
-
     // tentative: prevent map height becomes 0px
     re.setElementStyle( this.mapDiv, 'height', '100%' );
     re.setElementStyle( this.mapDiv, 'background-color', '#051111' );

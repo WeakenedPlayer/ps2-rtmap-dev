@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { LeafletService } from './services/leaflet/leaflet.service';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
+
 
 @NgModule({
   declarations: [
@@ -11,6 +11,8 @@ import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.compon
   exports: [
     LeafletMapComponent
   ],
-  providers: [ LeafletService ],
+  providers: [
+  ],
 })
-export class LeafletModule { }
+export class LeafletModule {
+}
