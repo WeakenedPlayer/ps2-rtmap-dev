@@ -7,10 +7,8 @@ import * as Leaflet from 'leaflet';
   styleUrls: ['./leaflet-map.component.css']
 })
 export class LeafletMapComponent implements OnInit {
-  @Input() option: Leaflet.MapOptions = {
-    attributionControl: true,
-    crs: Leaflet.CRS.Simple
-  };
+  @Input() option: Leaflet.MapOptions = {}; // default value
+
   private mapDiv: any;
   private map: Leaflet.Map;
   private tile: Leaflet.TileLayer;
@@ -21,7 +19,9 @@ export class LeafletMapComponent implements OnInit {
     // tentative: prevent map height becomes 0px
     re.setElementStyle( this.mapDiv, 'height', '100%' );
     re.setElementStyle( this.mapDiv, 'background-color', '#051111' );
+  }
 
+  ngOnInit(): void {
     this.map = Leaflet.map( this.mapDiv, this.option );
     this.map.fitBounds([
                 [0, 0],
@@ -40,8 +40,4 @@ export class LeafletMapComponent implements OnInit {
     );
     this.map.addLayer( this.tile );
   }
-
-  ngOnInit() {
-  }
-
 }

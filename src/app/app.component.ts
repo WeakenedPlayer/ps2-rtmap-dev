@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+  mapOption: Leaflet.MapOptions;
 
   constructor( ) {
+    this.mapOption = {
+      crs: Leaflet.CRS.Simple,
+      attributionControl: true
+    };
   }
 }
