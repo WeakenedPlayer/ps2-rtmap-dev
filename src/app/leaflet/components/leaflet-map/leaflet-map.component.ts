@@ -8,8 +8,7 @@ import * as Leaflet from 'leaflet';
 })
 export class LeafletMapComponent implements OnInit {
   @Input() option: Leaflet.MapOptions = {
-    crs: Leaflet.CRS.Simple,
-    attributionControl: false
+    attributionControl: false, crs: Leaflet.CRS.Simple
   };
 
   private mapDiv: any;
@@ -24,10 +23,7 @@ export class LeafletMapComponent implements OnInit {
     re.setElementStyle( this.mapDiv, 'height', '100%' );
     re.setElementStyle( this.mapDiv, 'background-color', '#051111' );
 
-    this.map = Leaflet.map( this.mapDiv, {
-      crs: L.CRS.Simple,
-      attributionControl: false,
-    } );
+    this.map = Leaflet.map( this.mapDiv, this.option );
     this.map.fitBounds([
                 [0, 0],
                 [0, 256],

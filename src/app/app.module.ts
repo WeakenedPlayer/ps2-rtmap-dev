@@ -10,20 +10,21 @@ import { firebaseConfig } from './basic/firebase_config';
 // Firebase
 import { AngularFireModule } from 'angularfire2';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
-import { LeafletMapComponent } from './leaflet/components/leaflet-map/leaflet-map.component';
+
+// Leafletモジュール
+import { LeafletModule } from './leaflet/leaflet.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyTextComponent,
-    /* LeafletTestComponent, */
-    LeafletMapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp( firebaseConfig )
+    AngularFireModule.initializeApp( firebaseConfig ),
+    LeafletModule
   ],
   providers: [],
   bootstrap: [AppComponent]
