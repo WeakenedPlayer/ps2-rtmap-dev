@@ -14,11 +14,6 @@
 <div class="row">
   <div class="col-sm-12">
   <h2>Log</h2>
-<!-- 
-Firebaseでは監視対象のノード以下すべて再取得されるので、ngForするとすべて描画し直しかもしれない。
-処理速度を考慮するなら、追加・削除・変更など、個別のイベントに着目した方が良いかもしれない。
-今回は練習なのでシンプルにやってみる。
- -->
 		<div class="input-group input-group-sm" *ngFor="let msg of serverMessages">
 		  <span class="input-group-addon">{{ msg.name }}</span>
 		  <span class="form-control">{{ msg.text }}</span>
