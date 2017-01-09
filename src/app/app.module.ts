@@ -15,7 +15,7 @@ import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.componen
   declarations: [
     AppComponent,
     MyTextComponent,
-    LeafletTestComponent
+    LeafletTestComponent,
   ],
   imports: [
     BrowserModule,
