@@ -15,10 +15,10 @@ export class LeafletTestComponent implements OnInit {
   constructor( el: ElementRef, re: Renderer ) {
     // create div element inside "app-leaflet-test" for leaflet map
     this.mapDiv = re.createElement( el.nativeElement, 'div');
-    re.setElementClass( el.nativeElement, 'leaflet-map', true );
-    re.setElementClass( this.mapDiv, 'leaflet-map', true );
 
-    this.mapDiv.innerHTML = 'dummy'; // to prevent map height becomes 0px (After fixing CSS, remove this line)
+    // tentative: prevent map height becomes 0px
+    re.setElementStyle( this.mapDiv, 'height', '100%' );
+    re.setElementStyle( this.mapDiv, 'background-color', '#051111' );
 
     this.map = Leaflet.map( this.mapDiv, {
       crs: L.CRS.Simple,
@@ -33,7 +33,6 @@ export class LeafletTestComponent implements OnInit {
 
     this.tile = Leaflet.tileLayer( 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/indar/{z}/{y}/{x}.jpg', {
         tileSize: 256,
-        continuousWorld: true, // バグ対策 :  https://github.com/Leaflet/Leaflet/issues/2776
         minZoom: 1,
         maxZoom: 7,
         maxNativeZoom: 5,

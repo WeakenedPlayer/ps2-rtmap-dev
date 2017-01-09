@@ -1,5 +1,3 @@
-.leaflet-map{
-	position: relative;
-  height: 100px;
+
+.leaflet-container{
 }
-.leaflet-container{ background: #051111;}

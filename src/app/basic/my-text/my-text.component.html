@@ -1,25 +1,21 @@
 <div class="row">
-	<div class="col-sm-12">
-		<h2>Message</h2>
-	  <div class="form-group">
-	    <button (click)="deleteAllMessages()">delete all</button>
-	  </div>
-    <div class="form-group">
-			<input type="text" [(ngModel)]="localText.name">
-			<input type="text" [(ngModel)]="localText.text">
-	    <button (click)="addMessage()">add</button>
-    </div>
+	<h2>Message</h2>
+  <div class="form-group">
+    <button (click)="deleteAllMessages()">delete all</button>
   </div>
+   <div class="form-group">
+		<input type="text" [(ngModel)]="localText.name">
+		<input type="text" [(ngModel)]="localText.text">
+    <button (click)="addMessage()">add</button>
+   </div>
 </div>
 <div class="row">
-  <div class="col-sm-12">
   <h2>Log</h2>
-		<div class="input-group input-group-sm" *ngFor="let msg of serverMessages">
-		  <span class="input-group-addon">{{ msg.name }}</span>
-		  <span class="form-control">{{ msg.text }}</span>
-		  <span class="input-group-btn">
-		    <button class="btn btn-default" type="button" (click)="deleteMessage( msg.$key )">delete</button>
-		  </span>
-	  </div>
+	<div class="input-group input-group-sm" *ngFor="let msg of serverMessages">
+	  <span class="input-group-addon">{{ msg.name }}</span>
+	  <span class="form-control">{{ msg.text }}</span>
+	  <span class="input-group-btn">
+	    <button class="btn btn-default" type="button" (click)="deleteMessage( msg.$key )">delete</button>
+	  </span>
 	</div>
 </div>
