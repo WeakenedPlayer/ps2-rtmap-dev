@@ -1,13 +1,23 @@
-import { Component, OnInit, Renderer, ElementRef, Input } from '@angular/core';
+import { Component, OnInit,
+         Renderer, ElementRef,
+         Input, Output, EventEmitter,
+         ChangeDetectionStrategy } from '@angular/core';
 import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'leaflet-map',
   templateUrl: './leaflet-map.component.html',
-  styleUrls: ['./leaflet-map.component.css']
+  styleUrls: ['./leaflet-map.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class LeafletMapComponent implements OnInit {
+  // used only in "OnInit"
   @Input() option: Leaflet.MapOptions = {}; // default value
+
+  // Interaction events
+  @Output() leafletClick: EventEmitter<Leaflet.MouseEvent> = new EventEmitter<Leaflet.MouseEvent>();
+  @Output() leafletDblClick: EventEmitter<Leaflet.MouseEvent> = new EventEmitter<Leaflet.MouseEvent>();
 
   private mapDiv: any;
   private map: Leaflet.Map;
@@ -16,6 +26,7 @@ export class LeafletMapComponent implements OnInit {
   constructor( el: ElementRef, re: Renderer ) {
     // create div element inside "app-leaflet-test" for leaflet map
     this.mapDiv = re.createElement( el.nativeElement, 'div');
+
     // tentative: prevent map height becomes 0px
     re.setElementStyle( this.mapDiv, 'height', '100%' );
     re.setElementStyle( this.mapDiv, 'background-color', '#051111' );
@@ -39,5 +50,9 @@ export class LeafletMapComponent implements OnInit {
       }
     );
     this.map.addLayer( this.tile );
+
+    // register event handlers
+    this.map.on( 'click', ( event: Leaflet.MouseEvent ): void => { this.leafletClick.emit( event ); } );
+    this.map.on( 'dblclick ', ( event: Leaflet.MouseEvent ): void => { this.leafletDblClick.emit( event ); } );
   }
 }
