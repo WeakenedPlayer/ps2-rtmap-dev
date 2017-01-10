@@ -6,8 +6,7 @@ import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'leaflet-marker',
-  templateUrl: './leaflet-marker.component.html',
-  styleUrls: ['./leaflet-marker.component.css']
+  template: '',
 })
 
 export class LeafletMarkerComponent implements OnInit, OnDestroy {
@@ -16,7 +15,7 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
   private marker: Leaflet.Marker = LeafletMarkerComponent.dummyMarker;
 
   // inputs
-  @Input() option: Leaflet.MarkerOptions = { draggable: true };
+  // setter/getter: https://angular.io/docs/ts/latest/cookbook/component-communication.html#!#parent-to-child-setter
   @Input()
   set latlng( latlng: Leaflet.LatLng )
   {
@@ -25,7 +24,8 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
   get latlng(): Leaflet.LatLng {
     return this.marker.getLatLng();
   }
-
+  @Input() option: Leaflet.MarkerOptions = { draggable: true };
+  
   // outputs
   @Output() latlngChange = new EventEmitter<Leaflet.LatLng>();
   @Output() leafletClick = new EventEmitter<Leaflet.MouseEvent>();

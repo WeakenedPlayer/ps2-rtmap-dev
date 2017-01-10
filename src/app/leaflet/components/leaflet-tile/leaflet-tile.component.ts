@@ -6,8 +6,7 @@ import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'leaflet-tile',
-  templateUrl: './leaflet-tile.component.html',
-  styleUrls: ['./leaflet-tile.component.css'],
+  template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
