@@ -1,4 +1,4 @@
-import { Component, OnInit,
+import { Component, OnInit, OnDestroy,
          Renderer, ElementRef,
          Input, Output, EventEmitter,
          ChangeDetectionStrategy } from '@angular/core';
@@ -11,7 +11,7 @@ import * as Leaflet from 'leaflet';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class LeafletMapComponent implements OnInit {
+export class LeafletMapComponent implements OnInit, OnDestroy {
   // used only in "OnInit"
   @Input() option: Leaflet.MapOptions = {}; // default value
 
@@ -32,27 +32,20 @@ export class LeafletMapComponent implements OnInit {
     re.setElementStyle( this.mapDiv, 'background-color', '#051111' );
   }
 
-  ngOnInit(): void {
+  // life-cycle hook
+  ngOnInit() {
     this.map = Leaflet.map( this.mapDiv, this.option );
-    this.map.fitBounds([
-                [0, 0],
-                [0, 256],
-                [-256, 256],
-                [-256, 0]
-              ]);
-
-    this.tile = Leaflet.tileLayer( 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/indar/{z}/{y}/{x}.jpg', {
-        tileSize: 256,
-        minZoom: 1,
-        maxZoom: 7,
-        maxNativeZoom: 5,
-        noWrap: true
-      }
-    );
-    this.map.addLayer( this.tile );
 
     // register event handlers
     this.map.on( 'click', ( event: Leaflet.MouseEvent ): void => { this.leafletClick.emit( event ); } );
     this.map.on( 'dblclick ', ( event: Leaflet.MouseEvent ): void => { this.leafletDblClick.emit( event ); } );
   }
+
+  ngOnDestroy() {
+    this.map.remove();
+  }
+
+  // called by child component (layer add/remove)
+  add( layer: Leaflet.Layer ) { this.map.addLayer( layer ); }
+  remove( layer: Leaflet.Layer ) { this.map.removeLayer( layer ); }
 }

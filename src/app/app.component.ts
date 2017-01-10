@@ -3,7 +3,9 @@ import * as Leaflet from 'leaflet';
 
 const option: Leaflet.MapOptions = {
   attributionControl: false,
-  crs: Leaflet.CRS.Simple
+  crs: Leaflet.CRS.Simple,
+  center: [-128,128],
+  zoom: 1
 };
 
 @Component({
