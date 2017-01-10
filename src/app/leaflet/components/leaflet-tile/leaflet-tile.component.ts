@@ -15,14 +15,8 @@ import * as Leaflet from 'leaflet';
 export class LeafletTileComponent implements OnInit, OnDestroy {
   private tile: Leaflet.TileLayer;
   map: LeafletMapComponent;
-  @Input() tileUrl: string = 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/esamir/{z}/{y}/{x}.jpg';
-  @Input() option: Leaflet.TileLayerOptions = {
-    tileSize: 256,
-    minZoom: 1,
-    maxZoom: 7,
-    maxNativeZoom: 5,
-    noWrap: true
-  };
+  @Input() tileUrl: string = '';
+  @Input() option: Leaflet.TileLayerOptions = {};
 
   constructor( @Host() map: LeafletMapComponent ) {
     this.map = map;
