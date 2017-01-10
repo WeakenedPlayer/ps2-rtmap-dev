@@ -8,6 +8,7 @@ import * as Leaflet from 'leaflet';
 })
 
 export class AppComponent {
+  pos: Leaflet.LatLng;
   mapOption: Leaflet.MapOptions = {
     attributionControl: false,
     crs: Leaflet.CRS.Simple,
@@ -26,6 +27,7 @@ export class AppComponent {
 
   onClick( event: Leaflet.MouseEvent ): void {
     console.log( 'clicked: ' + event.latlng );
+    this.pos = event.latlng;
   }
 
   onDblClick( event: Leaflet.MouseEvent ): void {
@@ -33,5 +35,6 @@ export class AppComponent {
   }
 
   constructor( ) {
+   this.pos = Leaflet.latLng( [0,0] );
   }
 }
