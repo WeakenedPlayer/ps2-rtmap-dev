@@ -1,14 +1,12 @@
 import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component'
 import { Component, OnInit, OnDestroy,
-         Renderer, ElementRef,
          Input, Output, EventEmitter, Host,
          ChangeDetectionStrategy } from '@angular/core';
 import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'leaflet-tile',
-  templateUrl: './leaflet-tile.component.html',
-  styleUrls: ['./leaflet-tile.component.css'],
+  template: '',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

@@ -1,0 +1,4 @@
+<leaflet-map [option]="mapOption" (leafletClick)="onClick($event)" (leafletDblClick)="onDblClick($event)">
+  <leaflet-tile [tileUrl]="tileUrl" [option]="tileOption"></leaflet-tile>
+  <leaflet-marker [(latlng)]="markerLatlng"></leaflet-marker>
+</leaflet-map>
