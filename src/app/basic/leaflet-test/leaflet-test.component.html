@@ -1,4 +1,5 @@
 <leaflet-map [option]="mapOption" (leafletClick)="onClick($event)" (leafletDblClick)="onDblClick($event)">
   <leaflet-tile [tileUrl]="tileUrl" [option]="tileOption"></leaflet-tile>
-  <leaflet-marker [(latlng)]="markerLatlng"></leaflet-marker>
+  <!-- work around : https://github.com/angular/angular/issues/8602 -->
+  <leaflet-marker [option]="markerOption" *ngFor="let mk of markers; let i = index" [(latlng)]="markers[i]" (leafletDragEnd)="updateMarker(i)"></leaflet-marker>
 </leaflet-map>

@@ -10,7 +10,7 @@ import * as Leaflet from 'leaflet';
 })
 
 export class LeafletMarkerComponent implements OnInit, OnDestroy {
-  private static dummyMarker: Leaflet.Marker = Leaflet.marker([0,0], {});
+  private static dummyMarker: Leaflet.Marker = Leaflet.marker([ 0, 0 ], {} );
   private map: LeafletMapComponent;
   private marker: Leaflet.Marker = LeafletMarkerComponent.dummyMarker;
 
@@ -25,7 +25,7 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
     return this.marker.getLatLng();
   }
   @Input() option: Leaflet.MarkerOptions = { draggable: true };
-  
+
   // outputs
   @Output() latlngChange = new EventEmitter<Leaflet.LatLng>();
   @Output() leafletClick = new EventEmitter<Leaflet.MouseEvent>();
@@ -34,11 +34,13 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
   @Output() leafletDragEnd = new EventEmitter<Leaflet.DragEndEvent>();
 
   constructor( @Host() map: LeafletMapComponent ) {
-    this.marker = Leaflet.marker( this.latlng, this.option );
     this.map = map;
   }
 
   ngOnInit() {
+    // create marker using given @Input()s 
+    this.marker = Leaflet.marker( this.latlng, this.option );
+
     // register marker to parent map
     this.map.add( this.marker );
 

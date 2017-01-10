@@ -2,7 +2,8 @@ import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 
-class Coordinate {
+/*
+class Coordinate implements Leaflet.LatLng {
   x: number = 0;
   y: number = 0;
 
@@ -14,7 +15,11 @@ class Coordinate {
     this.x = x;
     this.y = y;
   }
-}
+  
+  lat: number;
+  lng: number;
+  alt: number;
+}*/
 
 @Component({
   selector: 'app-leaflet-test',
@@ -39,17 +44,16 @@ export class LeafletTestComponent implements OnInit {
     noWrap: true
   };
   af: AngularFire;
+  markerOption: Leaflet.MarkerOptions = { draggable: true };
 
-  locationObserver: FirebaseObjectObservable<any>;
-  location: Coordinate = new Coordinate( 0, 0 );
-  markerLatlng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ] );
+  locationObserver: FirebaseListObservable<any>;
+  markers: Array<Leaflet.LatLng> = new Array<Leaflet.LatLng>();
 
   constructor( af: AngularFire ) {
     this.af = af;
-    this.locationObserver = this.af.database.object('/loc');
+    this.locationObserver = this.af.database.list('/loc');
     this.locationObserver.subscribe( snapshot => {
-      this.location = snapshot;
-      this.markerLatlng = Leaflet.latLng( [ this.location.x, this.location.y ] );
+      this.markers = snapshot;
     });
   }
 
@@ -57,19 +61,27 @@ export class LeafletTestComponent implements OnInit {
   }
 
   onClick( event: Leaflet.MouseEvent ): void {
-    console.log( 'clicked: ' + event.latlng );
-      this.location = new Coordinate( event.latlng.lat, event.latlng.lng );
-      this.markerLatlng = Leaflet.latLng( event.latlng );
-      this.locationObserver.set( this.location );
+    this.addMarker( event.latlng );
   }
 
   onDblClick( event: Leaflet.MouseEvent ): void {
-    console.log( 'double clicked: ' + event.latlng );
+  }
+
+  addMarker( p: Leaflet.LatLng ) {
+    this.locationObserver.push( p );
+  }
+
+  deleteMarker( key: string ) {
+    this.locationObserver.remove( key );
+  }
+
+  deleteAllMarker() {
+    this.locationObserver.remove();
+  }
+  
+  updateMarker( i: number ) {
+    this.locationObserver.update( this.markers.keys[i], this.markers[i] );
   }
 }
-
-/* ------------------------------------------------------------------------------------------------
- * References
- * [1] https://angular.io/docs/ts/latest/api/core/index/ElementRef-class.html
- * [2] https://angular.io/docs/ts/latest/api/core/index/Renderer-class.html
--------------------------------------------------------------------------------------------------*/
+// References
+// [1] AngularFire: https://github.com/angular/angularfire2/blob/master/docs/3-retrieving-data-as-lists.md
