@@ -4,11 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { MyTextComponent } from './basic/my-text/my-text.component';
-import { firebaseConfig } from './basic/firebase_config';
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
+import { firebaseConfig } from './basic/firebase_config';
+
+// Leaflet
+import { LeafletModule } from './leaflet/leaflet.module';
+
+// テスト用コンポーネント
+import { MyTextComponent } from './basic/my-text/my-text.component';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
 
 @NgModule({
@@ -21,7 +26,8 @@ import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.componen
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp( firebaseConfig )
+    AngularFireModule.initializeApp( firebaseConfig ),
+    LeafletModule
   ],
   providers: [],
   bootstrap: [AppComponent]

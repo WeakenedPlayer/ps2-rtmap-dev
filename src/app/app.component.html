@@ -1,6 +1,9 @@
 <div class="col-sm-10" style="height: 100%; padding: 0px;">
-<app-leaflet-test></app-leaflet-test>
+	<leaflet-map [option]="mapOption" (leafletClick)="onClick($event)" (leafletDblClick)="onDblClick($event)">
+  	<leaflet-tile [tileUrl]="tileUrl" [option]="tileOption"></leaflet-tile>
+	</leaflet-map>
 </div>
+
 <div class="col-sm-2">
-<app-my-text></app-my-text>
+  <app-my-text></app-my-text>
 </div>

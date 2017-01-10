@@ -22,7 +22,6 @@ export class MyTextComponent implements OnInit {
   constructor( af: AngularFire ) {
     this.af = af;
     this.localText = { name: 'anonymous', text: '' };
-
     this.serverMessageObserver = this.af.database.list('/messages');
 
     // 変更を監視(一部に変更があっても全部取得しなおされる)
