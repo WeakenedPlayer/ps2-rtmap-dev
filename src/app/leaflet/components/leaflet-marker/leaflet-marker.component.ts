@@ -24,6 +24,7 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
   get latlng(): Leaflet.LatLng {
     return this.marker.getLatLng();
   }
+  // option: http://leafletjs.com/reference-1.0.2.html#marker
   @Input() option: Leaflet.MarkerOptions = { draggable: true };
 
   // outputs
@@ -41,6 +42,7 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
     // create marker using given @Input()s 
     this.marker = Leaflet.marker( this.latlng, this.option );
 
+    console.log( this.latlng );
     // register marker to parent map
     this.map.add( this.marker );
 
