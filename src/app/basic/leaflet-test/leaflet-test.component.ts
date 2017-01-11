@@ -2,7 +2,10 @@ import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 
-class Coordinate {
+/* 要検証
+const scale = 32;
+
+class Coordinate implements Leaflet.LatLng {
   x: number = 0;
   y: number = 0;
 
@@ -14,6 +17,25 @@ class Coordinate {
     this.x = x;
     this.y = y;
   }
+
+  set lat ( lat: number ) { this.x = lat * scale; }
+  get lat (): number { return this.x / scale; }
+  set lng ( lng: number ) { this.y = lng * scale; }
+  get lng (): number { return this.y / scale; }
+  set alt ( alt: number ) {}
+  get alt (): number { return 0; }
+
+  equals( otherLatLng: Leaflet.LatLngExpression, maxMargin?: number): boolean { return false; }
+  toString(): string { return ''; }
+  distanceTo(otherLatLng: Leaflet.LatLngExpression): number { return 0; };
+  wrap(): Leaflet.LatLng { return Leaflet.latLng( [ 8192, 8192 ] ); };
+  toBounds(sizeInMeters: number): Leaflet.LatLngBounds { return Leaflet.latLngBounds( Leaflet.latLng( [0,0]), Leaflet.latLng( [8192,8192]) ); };
+}
+ */
+
+class Coord {
+  key: string;
+  latlng: Leaflet.LatLng;
 }
 
 @Component({
@@ -30,7 +52,7 @@ export class LeafletTestComponent implements OnInit {
     center: [ -128, 128 ],
     zoom: 1
   };
-  tileUrl: string = 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/esamir/{z}/{y}/{x}.jpg';
+  tileUrl: string = 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/hossin/{z}/{y}/{x}.jpg';
   tileOption: Leaflet.TileLayerOptions = {
     tileSize: 256,
     minZoom: 1,
@@ -39,37 +61,47 @@ export class LeafletTestComponent implements OnInit {
     noWrap: true
   };
   af: AngularFire;
-
-  locationObserver: FirebaseObjectObservable<any>;
-  location: Coordinate = new Coordinate( 0, 0 );
-  markerLatlng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ] );
+  markerOption: Leaflet.MarkerOptions = { draggable: true };
+  markerObserver: FirebaseListObservable<any>;
+  tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [0,0 ]);
 
   constructor( af: AngularFire ) {
+    // this.markers.push( { key:'aaaa', latlng: Leaflet.latLng( [ 20, 30]) } );
     this.af = af;
-    this.locationObserver = this.af.database.object('/loc');
-    this.locationObserver.subscribe( snapshot => {
-      this.location = snapshot;
-      this.markerLatlng = Leaflet.latLng( [ this.location.x, this.location.y ] );
+    this.markerObserver = this.af.database.list('/loc');
+    this.markerObserver.subscribe( snapshot => {
+      // console.log( snapshot );
     });
   }
 
   ngOnInit() {
   }
 
-  onClick( event: Leaflet.MouseEvent ): void {
-    console.log( 'clicked: ' + event.latlng );
-      this.location = new Coordinate( event.latlng.lat, event.latlng.lng );
-      this.markerLatlng = Leaflet.latLng( event.latlng );
-      this.locationObserver.set( this.location );
+  onMapClick( event: Leaflet.MouseEvent ): void {
+    this.addMarker( event.latlng );
   }
 
-  onDblClick( event: Leaflet.MouseEvent ): void {
-    console.log( 'double clicked: ' + event.latlng );
+  onMarkerClick( key: string ): void {
+    this.deleteMarker( key );
+  }
+
+  addMarker( p: Leaflet.LatLng ) {
+    this.markerObserver.push( p );
+  }
+
+  deleteMarker( key: string ) {
+    this.markerObserver.remove( key );
+  }
+
+  deleteAllMarker() {
+    this.markerObserver.remove();
+  }
+
+  // ドラッグアンドドロップで更新したい場合、サービスの導入が必要
+  updateMarker( key, marker: Leaflet.LatLng ) {
+    this.markerObserver.update( key, marker );
   }
 }
 
-/* ------------------------------------------------------------------------------------------------
- * References
- * [1] https://angular.io/docs/ts/latest/api/core/index/ElementRef-class.html
- * [2] https://angular.io/docs/ts/latest/api/core/index/Renderer-class.html
--------------------------------------------------------------------------------------------------*/
+// References
+// [1] AngularFire: https://github.com/angular/angularfire2/blob/master/docs/3-retrieving-data-as-lists.md
