@@ -42,7 +42,6 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
     // create marker using given @Input()s 
     this.marker = Leaflet.marker( this.latlng, this.option );
 
-    console.log( this.latlng );
     // register marker to parent map
     this.map.add( this.marker );
 
