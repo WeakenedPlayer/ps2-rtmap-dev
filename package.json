@@ -27,7 +27,8 @@
     "zone.js": "^0.7.2",
     "firebase": "latest",
     "angularfire2": "latest",
-    "leaflet": "latest"
+    "leaflet": "latest",
+    "@types/leaflet": "latest"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
