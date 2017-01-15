@@ -16,11 +16,19 @@ import { LeafletModule } from './leaflet/leaflet.module';
 import { MyTextComponent } from './basic/my-text/my-text.component';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
 
+// UI
+import { InfoComponent } from './basic/info/info.component';
+import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
+
+import { ConstantsService } from './services/constants/constants.service';
+
 @NgModule({
   declarations: [
     AppComponent,
     MyTextComponent,
-    LeafletTestComponent
+    LeafletTestComponent,
+    InfoComponent,
+    ContinentSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,7 @@ import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.componen
     AngularFireModule.initializeApp( firebaseConfig ),
     LeafletModule
   ],
-  providers: [],
+  providers: [ConstantsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
