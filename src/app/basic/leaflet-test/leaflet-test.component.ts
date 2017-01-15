@@ -15,22 +15,19 @@ export class LeafletTestComponent implements OnInit {
   mapOption: Leaflet.MapOptions;
   @Input() tileUrl: string = '';
   tileOption: Leaflet.TileLayerOptions;
-//  af: AngularFire;
   markerOption: Leaflet.MarkerOptions = { draggable: true };
-//  markerObserver: FirebaseListObservable<any>;
   tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ]);
+  location: any;
 
   observer: ContinentObserverService;
-  constructor(/* af: AngularFire,*/ cs: ConstantsService, observer: ContinentObserverService ) {
-//    this.af = af;
-//    this.markerObserver = this.af.database.list('/loc');
- //   this.markerObserver.subscribe( snapshot => {});
+  constructor( cs: ConstantsService, observer: ContinentObserverService ) {
     this.observer = observer;
     this.mapOption = ConstantsService.MapOption;
     this.tileOption = ConstantsService.TileOption;
   }
 
   ngOnInit() {
+    this.location = this.observer.getActiveLocation();
   }
 
   onMapClick( event: Leaflet.MouseEvent ): void {

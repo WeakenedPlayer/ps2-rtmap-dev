@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
 import * as Leaflet from 'leaflet';
 
-export class ContinentInfo {
+export class Continent {
   id: number;
   name: string;
   url: string;      // tile image url
+}
+
+export class Location {
+  icon: number;
+  latlng: Leaflet.LatLng;
+}
+
+export class LocationSummaryClass {
+  id: number;
+  lastUpdated: Date;
+  totalMarkers: number;
 }
 
 @Injectable()
@@ -24,7 +35,7 @@ export class ConstantsService {
     noWrap: true
   };
 
-  public static readonly ContinentInfoList: ContinentInfo[] =
+  public static readonly ContinentInfoList: Continent[] =
   [
     { id: 1, name: 'Indar', url: 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/indar/{z}/{y}/{x}.jpg'},
     { id: 2, name: 'Esamir', url: 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/esamir/{z}/{y}/{x}.jpg'},
