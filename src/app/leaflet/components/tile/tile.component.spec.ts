@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LeafletTileComponent } from './leaflet-tile.component';
+import { LeafletTileComponent } from './tile.component';
 
 describe('LeafletTileComponent', () => {
   let component: LeafletTileComponent;
