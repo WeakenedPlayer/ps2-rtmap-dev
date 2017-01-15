@@ -16,13 +16,15 @@ import { LeafletModule } from './leaflet/leaflet.module';
 import { MyTextComponent } from './basic/my-text/my-text.component';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
 import { InfoComponent } from './basic/info/info.component';
+import { MapSelectorComponent } from './ui/map-selector/map-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyTextComponent,
     LeafletTestComponent,
-    InfoComponent
+    InfoComponent,
+    MapSelectorComponent
   ],
   imports: [
     BrowserModule,
