@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LeafletMapComponent } from './leaflet-map.component';
+import { LeafletMapComponent } from './map.component';
 
 describe('LeafletMapComponent', () => {
   let component: LeafletMapComponent;

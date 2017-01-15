@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
+import { LeafletMapComponent } from './components/map/map.component';
 import { LeafletTileComponent } from './components/leaflet-tile/leaflet-tile.component';
 import { LeafletMarkerComponent } from './components/leaflet-marker/leaflet-marker.component';
 

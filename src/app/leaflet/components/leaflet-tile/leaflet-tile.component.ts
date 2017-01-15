@@ -1,4 +1,4 @@
-import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component'
+import { LeafletMapComponent } from '../map/map.component'
 import { Component, OnInit, OnDestroy,
          Input, Output, EventEmitter, Host,
          ChangeDetectionStrategy } from '@angular/core';

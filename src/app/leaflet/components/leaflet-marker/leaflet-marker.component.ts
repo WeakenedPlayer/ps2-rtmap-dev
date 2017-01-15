@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy,
          Input, Output, EventEmitter, Host,
          ChangeDetectionStrategy } from '@angular/core';
-import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component'
+import { LeafletMapComponent } from '../map/map.component'
 import * as Leaflet from 'leaflet';
 
 const dummyMarker: Leaflet.Marker = Leaflet.marker([ 0, 0 ], {} );
