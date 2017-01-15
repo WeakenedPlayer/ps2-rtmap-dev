@@ -4,6 +4,8 @@ import { Component, OnInit, OnDestroy,
 import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component'
 import * as Leaflet from 'leaflet';
 
+const dummyMarker: Leaflet.Marker = Leaflet.marker([ 0, 0 ], {} );
+
 @Component({
   selector: 'leaflet-marker',
   template: '',
@@ -35,6 +37,7 @@ export class LeafletMarkerComponent implements OnInit, OnDestroy {
   @Output() leafletDragEnd = new EventEmitter<Leaflet.DragEndEvent>();
 
   constructor( @Host() map: LeafletMapComponent ) {
+    this.marker = LeafletMarkerComponent.dummyMarker;
     this.map = map;
   }
 

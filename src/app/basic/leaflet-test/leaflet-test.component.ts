@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer, ElementRef, Input } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 
@@ -21,7 +21,7 @@ export class LeafletTestComponent implements OnInit {
     center: [ -128, 128 ],
     zoom: 1
   };
-  tileUrl: string = 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/hossin/{z}/{y}/{x}.jpg';
+  @Input() tileUrl: string = '';
   tileOption: Leaflet.TileLayerOptions = {
     tileSize: 256,
     minZoom: 1,
@@ -32,14 +32,12 @@ export class LeafletTestComponent implements OnInit {
   af: AngularFire;
   markerOption: Leaflet.MarkerOptions = { draggable: true };
   markerObserver: FirebaseListObservable<any>;
-  tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [0,0 ]);
+  tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ]);
 
   constructor( af: AngularFire ) {
-    // this.markers.push( { key:'aaaa', latlng: Leaflet.latLng( [ 20, 30]) } );
     this.af = af;
     this.markerObserver = this.af.database.list('/loc');
     this.markerObserver.subscribe( snapshot => {
-      // console.log( snapshot );
     });
   }
 
