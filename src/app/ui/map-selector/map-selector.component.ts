@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Resources } from '../../resource';
 
 @Component({
-  selector: 'app-map-selector',
-  templateUrl: './map-selector.component.html'
+  selector: 'app-continent-selector',
+  templateUrl: './continent-selector.component.html'
 })
-export class MapSelectorComponent implements OnInit {
+export class ContinentSelectorComponent implements OnInit {
   isActive: boolean = true;
   continents: Resources.ContinentInfo[] = Resources.ContinentInfoList;
   @Input()  selectedContinent: Resources.ContinentInfo;
