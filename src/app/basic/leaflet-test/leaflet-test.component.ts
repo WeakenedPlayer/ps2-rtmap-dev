@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer, ElementRef, Input } from '@angular/core';
 import * as Leaflet from 'leaflet';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { ConstantsService } from '../../services/constants/constants.service';
+import { ContinentObserverService } from '../../services/continent-observer/continent-observer.service';
 
 @Component({
   selector: 'app-leaflet-test',
@@ -12,23 +12,21 @@ import { ConstantsService } from '../../services/constants/constants.service';
 export class LeafletTestComponent implements OnInit {
   // map related options
   mapOption: Leaflet.MapOptions;
-  @Input() tileUrl: string = '';
+  @Input() selectedContinent;
   tileOption: Leaflet.TileLayerOptions;
-  af: AngularFire;
   markerOption: Leaflet.MarkerOptions = { draggable: true };
-  markerObserver: FirebaseListObservable<any>;
   tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ]);
+  location: any;
 
-  constructor( af: AngularFire, cs: ConstantsService ) {
-    this.af = af;
-    this.markerObserver = this.af.database.list('/loc');
-    this.markerObserver.subscribe( snapshot => {});
-
+  observer: ContinentObserverService;
+  constructor( cs: ConstantsService, observer: ContinentObserverService ) {
+    this.observer = observer;
     this.mapOption = ConstantsService.MapOption;
     this.tileOption = ConstantsService.TileOption;
   }
 
   ngOnInit() {
+    this.location = this.observer.getActiveLocation();
   }
 
   onMapClick( event: Leaflet.MouseEvent ): void {
@@ -40,20 +38,20 @@ export class LeafletTestComponent implements OnInit {
   }
 
   addMarker( p: Leaflet.LatLng ) {
-    this.markerObserver.push( p );
+   this.observer.push( p );
   }
 
   deleteMarker( key: string ) {
-    this.markerObserver.remove( key );
+    //this.markerObserver.remove( key );
   }
 
   deleteAllMarker() {
-    this.markerObserver.remove();
+ //   this.markerObserver.remove();
   }
 
   // ドラッグアンドドロップで更新したい場合、サービスの導入が必要
   updateMarker( key, marker: Leaflet.LatLng ) {
-    this.markerObserver.update( key, marker );
+ //   this.markerObserver.update( key, marker );
   }
 }
 
