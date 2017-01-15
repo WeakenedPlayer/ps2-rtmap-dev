@@ -1,15 +1,15 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Resources } from '../../resource';
 
 @Component({
-  selector: 'map-selector',
-  templateUrl: './map-selector.component.html',
-  styleUrls: ['./map-selector.component.css']
+  selector: 'app-map-selector',
+  templateUrl: './map-selector.component.html'
 })
 export class MapSelectorComponent implements OnInit {
-  @Output() selectedContinent: Resources.ContinentInfo;
   isActive: boolean = true;
   continents: Resources.ContinentInfo[] = Resources.ContinentInfoList;
+  @Input()  selectedContinent: Resources.ContinentInfo;
+  @Output() selectedContinentChange = new EventEmitter<Resources.ContinentInfo>();
 
   constructor() {
     this.continents = Resources.ContinentInfoList;
@@ -18,7 +18,7 @@ export class MapSelectorComponent implements OnInit {
 
   selectContinent( continent: Resources.ContinentInfo ) {
     // needs validation
-    this.selectedContinent = continent;
+    this.selectedContinentChange.emit( continent );
   }
 
   toggleActivation() {
