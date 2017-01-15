@@ -21,6 +21,7 @@ import { InfoComponent } from './basic/info/info.component';
 import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
 
 import { ConstantsService } from './services/constants/constants.service';
+import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ConstantsService } from './services/constants/constants.service';
     AngularFireModule.initializeApp( firebaseConfig ),
     LeafletModule
   ],
-  providers: [ConstantsService],
+  providers: [ConstantsService, ContinentObserverService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@ import * as Leaflet from 'leaflet';
 export class ContinentInfo {
   id: number;
   name: string;
-  url: string;
+  url: string;      // tile image url
 }
 
 @Injectable()
@@ -32,5 +32,11 @@ export class ConstantsService {
     { id: 4, name: 'Hossin', url: 'https://raw.githubusercontent.com/WeakenedPlayer/resource/master/map/hossin/{z}/{y}/{x}.jpg'}
   ];
 
+  public static DbLocationUrl( continentId: number ) {
+    return '/loc/' + continentId;
+  }
+
   constructor() { }
+
+
 }

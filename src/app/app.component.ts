@@ -11,5 +11,6 @@ import { ConstantsService, ContinentInfo } from './services/constants/constants.
 export class AppComponent {
   selectedContinent: ContinentInfo = ConstantsService.ContinentInfoList[0];
   constructor( ) {
+    // console.log( 'appComponent: ' + this.selectedContinent );
   }
 }
