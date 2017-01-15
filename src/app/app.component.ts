@@ -9,7 +9,7 @@ import { Resources } from './resource';
 })
 
 export class AppComponent {
-  selectedContinent: Resources.ContinentInfo = Resources.ContinentInfoList[1];
+  selectedContinent: Resources.ContinentInfo = Resources.ContinentInfoList[0];
   constructor( ) {
   }
 }

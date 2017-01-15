@@ -1,11 +1,7 @@
 import { Component, OnInit, Renderer, ElementRef, Input } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-
-class Coord {
-  key: string;
-  latlng: Leaflet.LatLng;
-}
+// import { ConstantsService } from '../../services/constants/constants.service';
 
 @Component({
   selector: 'app-leaflet-test',
@@ -34,7 +30,7 @@ export class LeafletTestComponent implements OnInit {
   markerObserver: FirebaseListObservable<any>;
   tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ]);
 
-  constructor( af: AngularFire ) {
+  constructor( af: AngularFire) {
     this.af = af;
     this.markerObserver = this.af.database.list('/loc');
     this.markerObserver.subscribe( snapshot => {
@@ -70,5 +66,3 @@ export class LeafletTestComponent implements OnInit {
   }
 }
 
-// References
-// [1] AngularFire: https://github.com/angular/angularfire2/blob/master/docs/3-retrieving-data-as-lists.md
