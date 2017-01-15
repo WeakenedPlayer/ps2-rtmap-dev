@@ -15,12 +15,14 @@ import { LeafletModule } from './leaflet/leaflet.module';
 // テスト用コンポーネント
 import { MyTextComponent } from './basic/my-text/my-text.component';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
+import { InfoComponent } from './basic/info/info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyTextComponent,
-    LeafletTestComponent
+    LeafletTestComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
