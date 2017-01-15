@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as Leaflet from 'leaflet';
-import { Resources } from './resource';
+import { ConstantsService, ContinentInfo } from './services/constants/constants.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Resources } from './resource';
 })
 
 export class AppComponent {
-  selectedContinent: Resources.ContinentInfo = Resources.ContinentInfoList[0];
+  selectedContinent: ContinentInfo = ConstantsService.ContinentInfoList[0];
   constructor( ) {
   }
 }
