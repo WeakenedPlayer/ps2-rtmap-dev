@@ -1,5 +1,5 @@
 <leaflet-map [option]="mapOption" (leafletClick)="onMapClick($event)">
-  <leaflet-tile [tileUrl]="tileUrl" [option]="tileOption"></leaflet-tile>
+  <leaflet-tile [tileUrl]="selectedContinent.url" [option]="tileOption"></leaflet-tile>
   <!-- work around : https://github.com/angular/angular/issues/8602 -->
   <!-- observable に代入できないので、latlng は入力のみ可能。 -->
   <leaflet-marker [option]="markerOption"

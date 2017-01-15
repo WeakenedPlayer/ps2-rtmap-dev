@@ -28,18 +28,23 @@ export class ContinentObserverService {
   }
 
   changeActiveContinent( continent: Continent ) {
+    console.log( continent );
     this.activeContinent = continent;
 
     // 一時的に古いデータを表示
     this.activeLocation = this.locationSnapshots[ this.activeContinent.id ];
 
     // Firebaseのsubscribeを開始。取得でき次第snapshotが更新される。
-    this.observer = this.af.database.list('/loc');//this.af.database.list( ConstantsService.DbLocationUrl( continent.id ) );
+    this.observer = this.af.database.list('/loc/'+ this.activeContinent.id.toString() );
     this.observer.subscribe( snapshot => {
       this.locationSnapshots[ this.activeContinent.id ] = snapshot;
       this.activeLocation = this.locationSnapshots[ this.activeContinent.id ];
       console.log( this.activeLocation );
     } );
+  }
+
+  push( a: Leaflet.LatLng ) {
+    this.observer.push( a );
   }
 
   getActiveLocation() {

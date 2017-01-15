@@ -1,6 +1,5 @@
 import { Component, OnInit, Renderer, ElementRef, Input } from '@angular/core';
 import * as Leaflet from 'leaflet';
-// import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { ConstantsService } from '../../services/constants/constants.service';
 import { ContinentObserverService } from '../../services/continent-observer/continent-observer.service';
 
@@ -13,7 +12,7 @@ import { ContinentObserverService } from '../../services/continent-observer/cont
 export class LeafletTestComponent implements OnInit {
   // map related options
   mapOption: Leaflet.MapOptions;
-  @Input() tileUrl: string = '';
+  @Input() selectedContinent;
   tileOption: Leaflet.TileLayerOptions;
   markerOption: Leaflet.MarkerOptions = { draggable: true };
   tmpLatLng: Leaflet.LatLng = Leaflet.latLng( [ 0, 0 ]);
@@ -39,7 +38,7 @@ export class LeafletTestComponent implements OnInit {
   }
 
   addMarker( p: Leaflet.LatLng ) {
- ///   this.markerObserver.push( p );
+   this.observer.push( p );
   }
 
   deleteMarker( key: string ) {

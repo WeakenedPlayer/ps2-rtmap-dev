@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ConstantsService, Continent } from '../../services/constants/constants.service';
-
 @Component({
   selector: 'app-continent-selector',
   templateUrl: './continent-selector.component.html'
@@ -9,6 +8,7 @@ import { ConstantsService, Continent } from '../../services/constants/constants.
 export class ContinentSelectorComponent implements OnInit {
   isActive: boolean = true;
   continents: Continent[] = ConstantsService.ContinentInfoList;
+
   @Input()  selectedContinent: Continent;
   @Output() selectedContinentChange = new EventEmitter<Continent>();
 
@@ -18,7 +18,7 @@ export class ContinentSelectorComponent implements OnInit {
   }
 
   selectContinent( continent: Continent ) {
-    // needs validation
+    // 暫定: 検証が必要
     this.selectedContinentChange.emit( continent );
   }
 
