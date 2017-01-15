@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MapSelectorComponent } from './map-selector.component';
+import { ContinentSelectorComponent } from './continent-selector.component';
 
 describe('MapSelectorComponent', () => {
-  let component: MapSelectorComponent;
-  let fixture: ComponentFixture<MapSelectorComponent>;
+  let component: ContinentSelectorComponent;
+  let fixture: ComponentFixture<ContinentSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapSelectorComponent ]
+      declarations: [ ContinentSelectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapSelectorComponent);
+    fixture = TestBed.createComponent(ContinentSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

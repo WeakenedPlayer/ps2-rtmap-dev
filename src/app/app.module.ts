@@ -16,7 +16,7 @@ import { LeafletModule } from './leaflet/leaflet.module';
 import { MyTextComponent } from './basic/my-text/my-text.component';
 import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
 import { InfoComponent } from './basic/info/info.component';
-import { MapSelectorComponent } from './ui/map-selector/map-selector.component';
+import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { MapSelectorComponent } from './ui/map-selector/map-selector.component';
     MyTextComponent,
     LeafletTestComponent,
     InfoComponent,
-    MapSelectorComponent
+    ContinentSelectorComponent
   ],
   imports: [
     BrowserModule,
