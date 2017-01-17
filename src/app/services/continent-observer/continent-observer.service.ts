@@ -28,7 +28,7 @@ export class ContinentObserverService {
   }
 
   changeActiveContinent( continent: Continent ) {
-    console.log( continent );
+    // console.log( continent );
     this.activeContinent = continent;
 
     // 一時的に古いデータを表示
@@ -39,7 +39,7 @@ export class ContinentObserverService {
     this.observer.subscribe( snapshot => {
       this.locationSnapshots[ this.activeContinent.id ] = snapshot;
       this.activeLocation = this.locationSnapshots[ this.activeContinent.id ];
-      console.log( this.activeLocation );
+      // console.log( this.activeLocation );
     } );
   }
 

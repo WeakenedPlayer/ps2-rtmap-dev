@@ -2,11 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
 // Firebase
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { firebaseConfig } from './basic/firebase_config';
 
 // Leaflet
@@ -19,9 +20,18 @@ import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.componen
 // UI
 import { InfoComponent } from './basic/info/info.component';
 import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
+import { MapViewerComponent } from './basic/map-viewer/map-viewer.component';
 
 import { ConstantsService } from './services/constants/constants.service';
 import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
+import { CensusService } from './services/census/census.service';
+
+import { UserAdminComponent } from './user-admin/user-admin.component';
+
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+};
 
 @NgModule({
   declarations: [
@@ -29,16 +39,32 @@ import { ContinentObserverService } from './services/continent-observer/continen
     MyTextComponent,
     LeafletTestComponent,
     InfoComponent,
-    ContinentSelectorComponent
+    ContinentSelectorComponent,
+    MapViewerComponent,
+    UserAdminComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp( firebaseConfig ),
+    AngularFireModule.initializeApp( firebaseConfig, myFirebaseAuthConfig ),
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: UserAdminComponent
+      },
+      {
+        path: 'map',
+        component: MapViewerComponent
+      },
+      {
+        path: 'text',
+        component: MyTextComponent
+      }
+    ]),
     LeafletModule
   ],
-  providers: [ConstantsService, ContinentObserverService ],
+  providers: [ConstantsService, ContinentObserverService, CensusService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
