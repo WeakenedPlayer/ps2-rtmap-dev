@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
@@ -19,6 +20,7 @@ import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.componen
 // UI
 import { InfoComponent } from './basic/info/info.component';
 import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
+import { MapViewerComponent } from './basic/map-viewer/map-viewer.component';
 
 import { ConstantsService } from './services/constants/constants.service';
 import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
@@ -30,13 +32,20 @@ import { CensusService } from './services/census/census.service';
     MyTextComponent,
     LeafletTestComponent,
     InfoComponent,
-    ContinentSelectorComponent
+    ContinentSelectorComponent,
+    MapViewerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp( firebaseConfig ),
+    RouterModule.forRoot([
+      {
+        path: '123',
+        component: AppComponent
+      }
+    ]),
     LeafletModule
   ],
   providers: [ConstantsService, ContinentObserverService, CensusService ],
