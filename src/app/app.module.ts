@@ -42,7 +42,7 @@ import { CensusService } from './services/census/census.service';
     AngularFireModule.initializeApp( firebaseConfig ),
     RouterModule.forRoot([
       {
-        path: 'map',
+        path: '',
         component: MapViewerComponent
       },
       {
