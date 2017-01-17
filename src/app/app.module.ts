@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 // Firebase
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { firebaseConfig } from './basic/firebase_config';
 
 // Leaflet
@@ -25,7 +25,14 @@ import { MapViewerComponent } from './basic/map-viewer/map-viewer.component';
 import { ConstantsService } from './services/constants/constants.service';
 import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
 import { CensusService } from './services/census/census.service';
- 
+
+import { UserAdminComponent } from './user-admin/user-admin.component';
+
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,15 +41,20 @@ import { CensusService } from './services/census/census.service';
     InfoComponent,
     ContinentSelectorComponent,
     MapViewerComponent,
+    UserAdminComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp( firebaseConfig ),
+    AngularFireModule.initializeApp( firebaseConfig, myFirebaseAuthConfig ),
     RouterModule.forRoot([
       {
         path: '',
+        component: UserAdminComponent
+      },
+      {
+        path: 'map',
         component: MapViewerComponent
       },
       {
