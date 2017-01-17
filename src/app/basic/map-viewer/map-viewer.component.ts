@@ -10,15 +10,6 @@ import * as Leaflet from 'leaflet';
 })
 export class MapViewerComponent implements OnInit {
   selectedContinent: Continent = ConstantsService.ContinentInfoList[0];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
-
-export class AppComponent {
   continentObserver: ContinentObserverService;
   result: any;
 
@@ -30,5 +21,14 @@ export class AppComponent {
   onContinentChange( newContinent: Continent ) {
     this.continentObserver.changeActiveContinent( newContinent );
   }
+  
+  ngOnInit() {
+  
+  }
 }
 
+
+/* ------------------------------------------------------------------------------------------------
+| 下位コンポーネントのイベントを監視する
+|  https://angular.io/docs/ts/latest/cookbook/component-communication.html#!#child-to-parent 
+------------------------------------------------------------------------------------------------ */

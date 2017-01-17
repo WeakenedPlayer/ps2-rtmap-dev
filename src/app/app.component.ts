@@ -15,8 +15,3 @@ export class AppComponent {
     this.census = census;
   }
 }
-
-/* ------------------------------------------------------------------------------------------------
-| 下位コンポーネントのイベントを監視する
-|  https://angular.io/docs/ts/latest/cookbook/component-communication.html#!#child-to-parent 
------------------------------------------------------------------------------------------------- */
