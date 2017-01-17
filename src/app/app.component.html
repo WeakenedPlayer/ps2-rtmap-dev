@@ -1,9 +1,18 @@
-<div class="col-sm-2">
+ <div>
+ <ul>
+ <li *ngFor="let img of result"><img [src]="'https://census.daybreakgames.com'+img.image_path"></li>
+ </ul>
+ </div>
+ <div class="col-sm-2">
   <div class="row">
       <app-continent-selector [(selectedContinent)]="selectedContinent"
                               (selectedContinentChange)="onContinentChange($event)"></app-continent-selector>
   </div>
 </div>
+<!-- 
 <div class="col-sm-10" style="height: 100%; padding: 0px;">
   <app-leaflet-test [selectedContinent]="selectedContinent"></app-leaflet-test>
 </div>
+ -->
+
+ 
