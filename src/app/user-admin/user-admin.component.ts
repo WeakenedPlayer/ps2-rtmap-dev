@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { AngularFire , AuthProviders, AuthMethods, FirebaseAuthState, AngularFireAuth } from 'angularfire2';
+import { AngularFire , AuthProviders, AuthMethods, FirebaseAuthState, AngularFireAuth, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import * as User from '../model/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-admin',
@@ -10,8 +12,10 @@ export class UserAdminComponent implements OnInit {
   private af: AngularFire = null;
   private authState: FirebaseAuthState = null;
   user: string = '';
+  uid: string = '';
   isAuthenticated: boolean = false;
 
+  foodObserver: FirebaseListObservable<any> = null;
   @Output() authStateChange = new EventEmitter<boolean>();
 
   constructor( af: AngularFire ) {
@@ -21,11 +25,15 @@ export class UserAdminComponent implements OnInit {
       this.isAuthenticated = ( this.authState !== null );
       if ( this.authState !== null ) {
         this.user = authState.auth.displayName;
+        this.uid = authState.auth.uid;
       } else {
         this.user = '';
+        this.uid = '';
       }
       this.authStateChange.emit( this.isAuthenticated );
     } );
+
+    this.foodObserver = this.af.database.list( '/food' );
   }
 
   ngOnInit() {
@@ -38,6 +46,19 @@ export class UserAdminComponent implements OnInit {
 
   logout() {
     this.af.auth.logout();
+  }
+
+  createUserProfile(){
+    let observer: FirebaseObjectObservable<any>;
+    let subscriber: Subscription;
+    observer = this.af.database.object( '/users/' + this.authState.uid );
+    subscriber = observer.subscribe( (data) => {
+    subscriber.unsubscribe();
+      if( data.$value === null ) {
+        let permission: User.Permission = new User.Permission( false, true );
+        observer.set( permission );
+      }
+    });
   }
 
 }
