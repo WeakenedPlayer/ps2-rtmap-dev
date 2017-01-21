@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 // Firebase
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { firebaseConfig } from './basic/firebase_config';
+import { firebaseConfig } from './experiment/firebase_config';
 
 // Leaflet
 import { LeafletModule } from './leaflet/leaflet.module';
@@ -28,7 +28,7 @@ import { ContinentObserverService } from './services/continent-observer/continen
 import { RbacService } from './services/rbac/rbac.service';
 //import { CensusService } from './services/census/census.service';
 
-import { UserAdminComponent } from './basic/user-admin/user-admin.component';
+import { UserAdminComponent } from './experiment/user-admin/user-admin.component';
 
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Google,
