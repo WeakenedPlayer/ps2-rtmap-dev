@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AngularFire , AuthProviders, AuthMethods, FirebaseAuthState, AngularFireAuth, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-// import * as User from '../model/user';
 import { Subscription } from 'rxjs';
 
 @Component({

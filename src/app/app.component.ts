@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as Leaflet from 'leaflet';
-import { RbacService } from './basic/rbac/rbac.service';
+import { RbacService } from './services/rbac/rbac.service';
 
 @Component({
   selector: 'app-root',

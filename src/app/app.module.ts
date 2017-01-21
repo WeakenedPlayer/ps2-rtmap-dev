@@ -14,18 +14,19 @@ import { firebaseConfig } from './basic/firebase_config';
 import { LeafletModule } from './leaflet/leaflet.module';
 
 // テスト用コンポーネント
-import { MyTextComponent } from './basic/my-text/my-text.component';
-import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
+//import { MyTextComponent } from './basic/my-text/my-text.component';
+// import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
 
 // UI
-import { InfoComponent } from './basic/info/info.component';
+//import { InfoComponent } from './basic/info/info.component';
 import { ContinentSelectorComponent } from './ui/continent-selector/continent-selector.component';
-import { MapViewerComponent } from './basic/map-viewer/map-viewer.component';
+import { MapViewerComponent } from './ui/map-viewer/map-viewer.component';
+import { MainMapComponent } from './ui/main-map/main-map.component';
 
 import { ConstantsService } from './services/constants/constants.service';
 import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
-// import { CensusService } from './services/census/census.service';
-import { RbacService } from './basic/rbac/rbac.service';
+import { RbacService } from './services/rbac/rbac.service';
+//import { CensusService } from './services/census/census.service';
 
 import { UserAdminComponent } from './basic/user-admin/user-admin.component';
 
@@ -37,11 +38,12 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MyTextComponent,
-    LeafletTestComponent,
-    InfoComponent,
+    // MyTextComponent,
+    // LeafletTestComponent,
+    // InfoComponent,
     ContinentSelectorComponent,
     MapViewerComponent,
+    MainMapComponent,
     UserAdminComponent
   ],
   imports: [
@@ -57,10 +59,6 @@ const myFirebaseAuthConfig = {
       {
         path: 'map',
         component: MapViewerComponent
-      },
-      {
-        path: 'text',
-        component: MyTextComponent
       }
     ]),
     LeafletModule
