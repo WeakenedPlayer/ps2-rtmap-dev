@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AngularFire , AuthProviders, AuthMethods, FirebaseAuthState, AngularFireAuth, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import * as User from '../model/user';
+// import * as User from '../model/user';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -53,8 +53,8 @@ export class UserAdminComponent implements OnInit {
     subscriber = observer.subscribe( (data) => {
     subscriber.unsubscribe();
       if( data.$value === null ) {
-        let permission: User.Permission = new User.Permission( false, true );
-        observer.set( permission );
+//        let permission: User.Permission = new User.Permission( false, true );
+       //         observer.set( permission );
       }
     });
   }

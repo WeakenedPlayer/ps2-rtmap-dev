@@ -27,7 +27,7 @@ import { ContinentObserverService } from './services/continent-observer/continen
 // import { CensusService } from './services/census/census.service';
 import { RbacService } from './basic/rbac/rbac.service';
 
-import { UserAdminComponent } from './user-admin/user-admin.component';
+import { UserAdminComponent } from './basic/user-admin/user-admin.component';
 
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Google,
