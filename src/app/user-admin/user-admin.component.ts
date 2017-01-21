@@ -32,8 +32,6 @@ export class UserAdminComponent implements OnInit {
       }
       this.authStateChange.emit( this.isAuthenticated );
     } );
-
-    this.foodObserver = this.af.database.list( '/food' );
   }
 
   ngOnInit() {

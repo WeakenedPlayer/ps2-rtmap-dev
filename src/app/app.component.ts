@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as Leaflet from 'leaflet';
-import { CensusService } from './services/census/census.service';
+import { RbacService } from './basic/rbac/rbac.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,8 @@ import { CensusService } from './services/census/census.service';
 })
 
 export class AppComponent {
-  census: CensusService;
-
-  constructor( census: CensusService ) {
-    this.census = census;
+  rbac: RbacService;
+  constructor( rbac: RbacService ) {
+    this.rbac = rbac;
   }
 }
