@@ -5,21 +5,21 @@ import { Subscription } from 'rxjs';
 const URL_BASE = '/rbac';
 
 export class Permission {
-  name: string;
+  dbKey: string;
   description: string;
 
-  constructor( name: string, descritpion: string ) {
-    this.name = name;
+  constructor( dbKey: string, descritpion: string ) {
+    this.dbKey = dbKey;
     this.description = descritpion;
   }
 }
 
 export class Role {
-  name: string;
+  dbKey: string;
   description: string;
 
-  constructor( name: string, descritpion: string ) {
-    this.name = name;
+  constructor( dbKey: string, descritpion: string ) {
+    this.dbKey = dbKey;
     this.description = descritpion;
   }
 }
@@ -88,16 +88,16 @@ export class RbacService {
   }
 
   // Permissionの生成
-  createPermission( name: string, description: string ): firebase.database.ThenableReference {
-    return this.getPermissions().push( new Permission( name, description ) );
+  createPermission( dbKey: string, description: string ): firebase.database.ThenableReference {
+    return this.getPermissions().push( new Permission( dbKey, description ) );
   }
   updatePermission( permissionKey: string, param: any ) {
     return this.getPermission( permissionKey ).update( param as Permission );
   }
 
   // Permissionの生成
-  createRole( name: string, description: string ): firebase.database.ThenableReference {
-    return this.getRoles().push( new Role( name, description ) );
+  createRole( dbKey: string, description: string ): firebase.database.ThenableReference {
+    return this.getRoles().push( new Role( dbKey, description ) );
   }
   updateRole( permissionKey: string, param: any ) {
     return this.getRole( permissionKey ).update( param as Role );

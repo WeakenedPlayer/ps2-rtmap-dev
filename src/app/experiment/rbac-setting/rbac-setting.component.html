@@ -6,16 +6,16 @@
 			<thead>
 			  <tr>
           <th>#</th>
-          <th>name</th>
+          <th>key</th>
           <th>description</th>
-			    <th  *ngFor="let permission of permissions ">{{ permission.name }}</th>
+			    <th  *ngFor="let permission of permissions ">{{ permission.dbKey }}</th>
 			    <th>Add permission</th>
 				</tr>
 			</thead>
 			<tbody>
 			  <tr *ngFor="let role of roles; let i=index">
           <td>{{i}}</td>
-          <td>{{role.name}}</td>
+          <td>{{role.dbKey}}</td>
           <td>{{role.description}}</td>
 			    <td  *ngFor="let permission of permissions" [ngSwitch]="checkValue( permission.$key, role.$key )">
              <button type="button" class="btn btn-default" *ngSwitchCase="undefined" style="width: 100%;" (click)="denyPermissionToRole( permission.$key, role.$key )">未設定</button>
