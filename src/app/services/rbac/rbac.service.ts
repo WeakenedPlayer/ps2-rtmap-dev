@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFire , FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Subscription } from 'rxjs';
 
-const URL_BASE = '/ttt';
+const URL_BASE = '/rbac';
 
 export class Permission {
   name: string;
@@ -48,7 +48,7 @@ export class RbacService {
   getPermission( permissionKey: string ): FirebaseObjectObservable<any> { return this.af.database.object( RbacService.getPermissionUrl( permissionKey ) ); }
 
   // assignmentの取得(RoleへのPermission割り当て)
-  getAssignments(): FirebaseListObservable<any> { return this.af.database.list( RbacService.getAssignmentUrl() + '/assign' ); }
+  getAssignments(): FirebaseObjectObservable<any> { return this.af.database.object( RbacService.getAssignmentUrl() ); }
   getRolePermissions( roleKey: string ): FirebaseObjectObservable<any> { return this.af.database.object( RbacService.getAllRolePermissionsUrl( roleKey ) ); }
   getRolePermission( roleKey: string, permissionKey: string ): FirebaseObjectObservable<any> { return this.af.database.object( RbacService.getRolesPermissionUrl( roleKey, permissionKey ) ); }
 

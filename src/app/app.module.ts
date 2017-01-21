@@ -15,7 +15,7 @@ import { LeafletModule } from './leaflet/leaflet.module';
 
 // テスト用コンポーネント
 //import { MyTextComponent } from './basic/my-text/my-text.component';
-// import { LeafletTestComponent } from './basic/leaflet-test/leaflet-test.component';
+import { RbacSettingComponent } from './experiment/rbac-setting/rbac-setting.component';
 
 // UI
 //import { InfoComponent } from './basic/info/info.component';
@@ -40,7 +40,7 @@ const myFirebaseAuthConfig = {
     AppComponent,
     // MyTextComponent,
     // LeafletTestComponent,
-    // InfoComponent,
+    RbacSettingComponent,
     ContinentSelectorComponent,
     MapViewerComponent,
     MainMapComponent,
@@ -54,7 +54,7 @@ const myFirebaseAuthConfig = {
     RouterModule.forRoot([
       {
         path: '',
-        component: UserAdminComponent
+        component: RbacSettingComponent
       },
       {
         path: 'map',
