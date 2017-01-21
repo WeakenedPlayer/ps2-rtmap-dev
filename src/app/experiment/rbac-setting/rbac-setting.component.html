@@ -24,7 +24,13 @@
 			    </td>
 			    <td>-</td>
 			  </tr>
-			  <tr><td>Add role</td></tr>
+			  <tr>
+          <td>Add role</td>
+          <td><input type="text" [ngModel]="newRoleName"></td>
+          <td><input type="text" [ngModel]="newRoleDescription"></td>
+          <td  *ngFor="let i of permissions">-</td>
+          <td>-</td>
+        </tr>
 			</tbody>
 		</table>
 	</div>

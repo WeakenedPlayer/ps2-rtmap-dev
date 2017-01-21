@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import { AngularFire , AuthProviders, AuthMethods, FirebaseAuthState, AngularFireAuth, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Subscription } from 'rxjs';
 import { RbacService } from '../../services/rbac/rbac.service';
@@ -16,26 +16,20 @@ export class RbacSettingComponent implements OnInit {
     roles: any = null;
     permissions: any = null;
     assignments: any;
-    
+
+    // 新規追加用
+    @Input() newRoleName: string;
+    @Input() newRoleDescription: string;
     constructor( rbac: RbacService ) {
         this.rbac = rbac;
         this.rolesObserver = this.rbac.getRoles();
         this.permissionsObserver = this.rbac.getPermissions();
         this.assignmentsObserver = this.rbac.getAssignments();
-    
-        
-        this.rolesObserver.subscribe( snapshot => {
-            this.roles = snapshot;
-        });
-    
-        this.permissionsObserver.subscribe( snapshot => {
-            this.permissions = snapshot;
-        });
-        
-        this.assignmentsObserver.subscribe( snapshot => {
-            // テーブルはそれほど大きくならないはずなのでこれで良しとする
-            this.assignments = snapshot;
-        });
+
+        // テーブルはそれほど大きくならないはずなのでこれで良しとする
+        this.rolesObserver.subscribe( snapshot => { this.roles = snapshot; });
+        this.permissionsObserver.subscribe( snapshot => { this.permissions = snapshot; });
+        this.assignmentsObserver.subscribe( snapshot => { this.assignments = snapshot; });
     }
     
     checkValue( permissionKey: string, roleKey: string ): boolean {
