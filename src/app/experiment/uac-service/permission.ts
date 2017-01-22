@@ -31,10 +31,10 @@ export class UacPermission {
 
 // user-permission 間の many-to-many の対応関係
 export class PermittedUser {
-    permissionKey: string;
+    uid: string;
     isAllowed: boolean;
-    constructor( permissionKey: string, isAllowed: boolean ) {
-        this.permissionKey = permissionKey;
+    constructor( uid: string, isAllowed: boolean ) {
+        this.uid = uid;
         this.isAllowed = isAllowed;
     }
 }
@@ -53,12 +53,14 @@ export class UacAccessControl {
     addPermissionToUser( permissionKey: string, uid: string, permission: boolean ) {}
     
     //　Permissionに所属するユーザを取得する
-    getUserByPermission( permissionKey: string ) {
+    getPermittedUsers( permissionKey: string ) {
         return new Observable<PermittedUser[]>( observer=>{
             this.af.database.list( '/uac/' + permissionKey ).subscribe( ( permissionsSnapshot ) => {
                 let result: PermittedUser[] = [];
                 // 取得した結果を整形
                 for ( let permission of permissionsSnapshot ) {
+                    // key: uid
+                    // value: permission(true/false)
                     result.push( new PermittedUser( permission.$key, permission.$value ) );
                 }
                 // 渡された observer に結果を渡して、処理はお任せ

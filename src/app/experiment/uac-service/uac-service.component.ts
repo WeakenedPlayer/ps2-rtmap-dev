@@ -15,7 +15,7 @@ export class UacServiceComponent implements OnInit {
     constructor( af: AngularFire ) {
         this.af = af;
         this.uac = new Uac.UacAccessControl( af );
-        this.uac.getUserByPermission( 'admin' ).subscribe( ( result )=>{ console.log( result); });
+        this.uac.getPermittedUsers( 'admin' ).subscribe( ( result )=>{ console.log( result); });
     }
     
 
