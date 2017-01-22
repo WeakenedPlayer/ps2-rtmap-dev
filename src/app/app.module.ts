@@ -26,7 +26,7 @@ import { MainMapComponent } from './ui/main-map/main-map.component';
 import { ConstantsService } from './services/constants/constants.service';
 import { ContinentObserverService } from './services/continent-observer/continent-observer.service';
 import { RbacService } from './services/rbac/rbac.service';
-//import { CensusService } from './services/census/census.service';
+import { CensusService } from './services/census/census.service';
 
 import { UserAdminComponent } from './experiment/user-admin/user-admin.component';
 
@@ -63,7 +63,7 @@ const myFirebaseAuthConfig = {
     ]),
     LeafletModule
   ],
-  providers: [ConstantsService, ContinentObserverService, RbacService ],
+  providers: [ConstantsService, ContinentObserverService, CensusService, RbacService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
