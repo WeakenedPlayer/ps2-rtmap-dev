@@ -2,7 +2,7 @@ import { AngularFire , FirebaseObjectObservable, FirebaseListObservable } from '
 import { Subscription } from 'rxjs';
 
 const URL_BASE = '/uac/admin';
-export class UacDeveloper {
+export class UacAdministrator {
     af: AngularFire;
 
     constructor( af: AngularFire ) {
