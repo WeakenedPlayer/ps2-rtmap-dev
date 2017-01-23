@@ -2,13 +2,15 @@ import { AngularFire , FirebaseObjectObservable, FirebaseListObservable } from '
 import { Subscription, Observable } from 'rxjs';
 
 const UAC_URL_BASE = '/uac/control/';
-
-// バラバラに保存したデータを統合するのがこの役割
-// /uac/
+const PERMISSION_URL_BASE = '/uac/permission/';
 
 export class PermissionOption {
-    displayName?: string;
-    description?: string;
+    displayName: string;
+    description: string;
+    constructor( displayName: string, description: string ) {
+        this.displayName = displayName;
+        this.description = description;
+    }
 }
 
 // Permission だけに着目した処理
@@ -22,7 +24,12 @@ export class UacPermission {
     }
     // permissionを作成する
     // バックエンドのアクセス権設定は Firebase コンソール上で実施するので、実質説明と「キー」の追加しかできない。
-    addPermission( permissionKey: string, option: PermissionOption ) {}
+    addPermission( permissionKey: string, option: PermissionOption ) {
+        if( permissionKey && option.displayName && option.description ) {
+            let permissions = this.af.database.object( PERMISSION_URL_BASE + permissionKey );
+            permissions.set( option );
+        }
+    }
     getAllPermissions() {}
     getPermission( permissionKey: string ) {}
     removePermission( permissionKey: string ) {}
@@ -53,9 +60,10 @@ export class UacAccessControl {
     // permissionを作成する
     // バックエンドのアクセス権設定は Firebase コンソール上で実施するので、実質説明と「キー」の追加しかできない。
     // 加えて、permissionKeyに対応するpermissionが存在するかも問わない。
-    addPermissionToUser( permissionKey: string, uid: string, permission: boolean ){
+    addPermissionToUser( permissionKey: string, uid: string, permission: boolean ) {
         if( permissionKey && uid ) {
             let observer = this.af.database.object( UAC_URL_BASE + permissionKey + '/' + uid );
+            observer.set( permission );
         }
     }
     

@@ -9,13 +9,19 @@ import * as Uac from './permission';
 })
 export class UacServiceComponent implements OnInit {
     uac: Uac.UacAccessControl;
+    permissions: Uac.UacPermission;
     af: AngularFire;
 
     administrators: FirebaseListObservable<any>;
     constructor( af: AngularFire ) {
         this.af = af;
         this.uac = new Uac.UacAccessControl( af );
-        this.uac.allowPermissionToUser( 'grantMapAccess', '135' ).then( result => { console.log(result); } );//.subscribe( ( result )=>{ console.log( result); });
+        this.permissions = new Uac.UacPermission( af );
+        
+        this.permissions.addPermission( 'mapAccess', new Uac.PermissionOption( '地図のアクセス権付与', '他のユーザに地図へのアクセス権を付与することができます。'));
+        this.permissions.addPermission( 'grantMapAccess', new Uac.PermissionOption( '地図アクセス権', '地図にアクセスできます。'));
+        this.uac.allowPermissionToUser( 'mapAccess', 'sampleUser' );
+        this.uac.allowPermissionToUser( 'grantMapAccess', 'sampleUser' );
     }
     
     loginWithGoogle() {
