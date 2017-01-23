@@ -15,10 +15,9 @@ export class UacServiceComponent implements OnInit {
     constructor( af: AngularFire ) {
         this.af = af;
         this.uac = new Uac.UacAccessControl( af );
-        this.uac.getPermittedUsers( 'admin' ).subscribe( ( result )=>{ console.log( result); });
+        this.uac.allowPermissionToUser( 'grantMapAccess', '135' ).then( result => { console.log(result); } );//.subscribe( ( result )=>{ console.log( result); });
     }
     
-
     loginWithGoogle() {
       // ログイン完了しても時間がかかるので、状態遷移が必要
       this.af.auth.login( { provider: AuthProviders.Google, method: AuthMethods.Redirect } );
